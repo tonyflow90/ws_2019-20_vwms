@@ -1,0 +1,70 @@
+@startuml
+
+title Classes - Class Recipe App
+
+class User
+class Address
+class Ingredient
+class Recipe
+class Comment
+class Rating
+class Favorite
+class ShoppingList
+enum Category
+enum Unit
+
+ShoppingList "1" -- "*" Ingredient
+
+User "1" -- "*" ShoppingList
+
+User "1" -- "0..1" Address
+User "1" -- "*" Favorite
+User "1" -- "*" Comment
+
+Recipe "*" -- "*" Category
+Recipe "1" -- "*" Comment
+Rating "0..1" -- "1" Comment
+Recipe "*" -- "1" User
+Recipe "1" -- "1" Favorite
+
+PreparationSteps "1" --* "1..*" Recipe: Conposition
+Ingredient "*" --* "1..*" Recipe: Conposition
+
+Unit "1" --o "*" Ingredient: Aggregation
+Price "1" --o "1" Ingredient: Aggregation
+
+class Price {
+    -Number value
+    -String currency
+}
+
+class Ingredient {
+  -String name
+  -String description
+}
+
+class Recipe {
+  -String title
+  -String description
+}
+
+class PreparationSteps {
+    -Number step
+    -String text
+}
+
+class User {
+  -String name
+  -String surname
+  -String email
+}
+
+class Rating {
+  -Nummber rating
+}
+
+class Comment {
+  -Rating rating
+  -String text
+}
+@enduml

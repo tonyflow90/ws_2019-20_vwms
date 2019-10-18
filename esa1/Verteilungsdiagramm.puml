@@ -1,0 +1,45 @@
+@startuml
+
+title Verteilungsdiagramm
+
+node "Database Server" {
+    database "PostgreSQL\n" {
+        [Stored Data] as SD
+    }
+}
+
+
+node "Server" {
+    node "NodeJS" {
+        node "Web Server" {
+            [Web App] as WA
+            [Data Access] as DA
+            interface Data
+        }
+    }
+}
+
+
+cloud Internet as I1 {
+}
+
+cloud Internet as I2 {
+}
+
+
+node "Client" {
+    [Web Browser] as WB
+    [Native Application] as NA
+}
+
+
+WB -down-> I1
+NA -down-> I2
+I1 -down-> WA
+WA -down-( Data
+I2 -down-( Data
+
+DA -- Data
+DA .. SD
+
+@enduml

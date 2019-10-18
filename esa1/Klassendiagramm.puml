@@ -1,6 +1,6 @@
 @startuml
 
-title Classes - Class Recipe App
+title Klassendiagramm
 
 class User
 class Address
@@ -8,7 +8,7 @@ class Ingredient
 class Recipe
 class Comment
 class Rating
-class Favorite
+class Favorites
 class ShoppingList
 enum Category
 enum Unit
@@ -18,14 +18,14 @@ ShoppingList "1" -- "*" Ingredient
 User "1" -- "*" ShoppingList
 
 User "1" -- "0..1" Address
-User "1" -- "*" Favorite
+User "1" -- "*" Favorites
 User "1" -- "*" Comment
 
 Recipe "*" -- "*" Category
 Recipe "1" -- "*" Comment
 Rating "0..1" -- "1" Comment
 Recipe "*" -- "1" User
-Recipe "1" -- "1" Favorite
+Recipe "1" -- "1" Favorites
 
 PreparationSteps "1" --* "1..*" Recipe: Conposition
 Ingredient "*" --* "1..*" Recipe: Conposition
@@ -46,6 +46,16 @@ class Ingredient {
 class Recipe {
   -String title
   -String description
+
+  +createIndredient(): { name, desc, unit, price }
+  +addIndredient(): { ingredient }
+  +addStep(): { number, text }
+  +addCategory():  { category }
+  +addComment(){ text, rating }
+
+  +addToFavorites()
+  +addToShoppingList()
+
 }
 
 class PreparationSteps {
@@ -67,4 +77,11 @@ class Comment {
   -Rating rating
   -String text
 }
+
+class Favorites {
+}
+
+class ShoppingList {
+}
+
 @enduml

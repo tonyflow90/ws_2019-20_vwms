@@ -14,4 +14,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Ant
+      run: ant run -buildfile ./esa4/build.xml
+    - name: Test with Ant
       run: ant test -buildfile ./esa4/build.xml
